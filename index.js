@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const connectDB = require('./backend/connectMongo.js');
 const userRoutes = require('./backend/routes/user.routes.js');
+const todoRoutes = require('./backend/routes/todos.routes.js')
 const cors = require('cors')
 const app = express();
 
@@ -13,7 +14,8 @@ const app = express();
 
 
 
- app.use('/auth',userRoutes)
+ app.use('/auth',userRoutes);
+app.use('/todos',todoRoutes)
 
 
 app.listen(process.env.PORT,()=>{
