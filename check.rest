@@ -1,0 +1,8 @@
+POST http://localhost:8082/auth/login
+Content-Type:application/json
+
+{   
+    
+    "password":"tejaswini222001",
+    "email":"tejabeleshe@gmail.com"
+}
