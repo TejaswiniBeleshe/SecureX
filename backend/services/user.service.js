@@ -17,6 +17,9 @@ class userLogics{
     generateToken(payload){
         return jwt.sign(payload,process.env.SECRETE_KEY)
     }
+    validateToken(token){
+        return jwt.verify(token,process.env.SECRETE_KEY)
+    }
 
 }
 

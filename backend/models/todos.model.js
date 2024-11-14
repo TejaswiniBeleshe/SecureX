@@ -16,7 +16,10 @@ const todosSchema = new mongoose.Schema({
         type:String,
         required:true,
     },
-    todolist:[todoSchema]
+    todolist:{
+       type: [todoSchema],
+       default:[],
+    }
 })
 
 const Todos = mongoose.model('Todos',todosSchema)

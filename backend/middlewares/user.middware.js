@@ -1,6 +1,7 @@
 const {validateUser,validateLoginUser} = require('../validators/user.validator.js')
 const userLogics = require('../services/user.service.js');
 const allUserLogics = new userLogics();
+
 const checkUser = (req,res,next)=>{
     try{
         let {error} = validateUser.validate(req.body);
@@ -59,5 +60,22 @@ const isLoginUserPresent = async(req,res,next)=>{
     }
 }
 
+const validateUserToken = async(req,res,next)=>{
+    // console.log(req.headers)
+    try{
+        const token = req.headers['authorization'].split(' ')[1]
+        let user = await allUserLogics.validateToken(token);
+        // console.log(user)
+        if(!user){
+            return res.status(403).send({message:'invalid token user is not found'})
+        }
+        req.userId = user
+        next()
+    }
+    catch(err){
+        return res.status(500).send({message:err.message})
+    } 
+}
 
-module.exports = {checkUser,isAlreadyPresent,checkLoginUser,isLoginUserPresent}
+
+module.exports = {checkUser,isAlreadyPresent,checkLoginUser,isLoginUserPresent,validateUserToken}

@@ -4,7 +4,12 @@ const Todos = ()=>{
     const [allTodos,setAllTodos] = useState('')
     const getAllTodos = async()=>{
         try{
-            let res = await fetch('http://localhost:8082/todos/673374199d268dcb5ff9992f')
+            let res = await fetch('http://localhost:8082/todos',{
+                method:'GET',
+                headers:{
+                    'Authorization':`Bearer ${localStorage.getItem('user_token')}`
+                }
+            })
             let datas = await res.json()
             console.log(datas)
             setAllTodos(datas)

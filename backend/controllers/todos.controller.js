@@ -4,8 +4,10 @@ const allTodoLogic = new todoLogic();
 
 const getAllTodo = async(req,res)=>{
     try{
-       let result = await allTodoLogic.getAll(req.params.user);
-       res.send(result.todolist)
+        // console.log(req.userId,'get request')
+       let userInfo = await allTodoLogic.getAll(req.userId);
+       console.log(userInfo)
+       res.send(userInfo.todolist)
     }
     catch(err){
         return res.status(500).send({message:err.message})
